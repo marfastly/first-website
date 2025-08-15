@@ -1,32 +1,44 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Welcome to My Website</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f9f9f9;
-      padding: 50px;
-    }
-    h1 {
-      color: #2c3e50;
-    }
-    p {
-      color: #555;
-      font-size: 1.1em;
-    }
-    img {
-      width: 200px;
-      margin-top: 20px;
-    }
-  </style>
+  <title>My Modular Website</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>👋 Hello, world!</h1>
-  <p>This is my first public website hosted with <strong>GitHub Pages</strong>.</p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo" />
+  <header>
+    <h1>🌐 Welcome to My Website</h1>
+    <nav>
+      <button onclick="loadContent('home.html')">Home</button>
+      <button onclick="loadContent('about.html')">About</button>
+      <button onclick="loadContent('contact.html')">Contact</button>
+    </nav>
+  </header>
+
+  <main id="content">
+    <p>Click the buttons above to load content.</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 My Website</p>
+  </footer>
+
+  <script>
+    function loadContent(file) {
+      fetch(file)
+        .then(response => {
+          if (!response.ok) throw new Error("Network error");
+          return response.text();
+        })
+        .then(html => {
+          document.getElementById("content").innerHTML = html;
+        })
+        .catch(error => {
+          document.getElementById("content").innerHTML = "<p>Error loading content.</p>";
+          console.error(error);
+        });
+    }
+  </script>
 </body>
 </html>
